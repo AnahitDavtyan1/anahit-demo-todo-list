@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Button } from "react-bootstrap";
 
 class Price extends Component {
   constructor(props) {
