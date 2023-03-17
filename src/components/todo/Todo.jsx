@@ -1,13 +1,15 @@
 import { Component } from "react";
-
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
-import { idGenerator } from "../utils/helpers";
-import Task from "./Task";
+import { idGenerator } from "../../utils/helpers";
+import Task from "../task/Task";
+import ConfirmDialog from "../ConfirmDialog";
+import styles from "./todo.module.css";
 
 class Todo extends Component {
   state = {
     tasks: [],
     newTaskTitle: "",
+    selectedTasks: new Set(),
   };
 
   handleInputChange = (event) => {
@@ -41,6 +43,45 @@ class Todo extends Component {
     });
   };
 
+  onTaskDelete = (taskId) => {
+    const { selectedTasks, tasks } = this.state;
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+
+    const newState = { tasks: newTasks };
+
+    if (selectedTasks.has(taskId)) {
+      const newSelectedTasks = new Set(selectedTasks);
+      newSelectedTasks.delete(taskId);
+      newState.selectedTasks = newSelectedTasks;
+    }
+    this.setState(newState);
+  };
+
+  onTaskSelect = (taskId) => {
+    const selectedTasks = new Set(this.state.selectedTasks);
+    if (selectedTasks.has(taskId)) {
+      selectedTasks.delete(taskId);
+    } else {
+      selectedTasks.add(taskId);
+    }
+    this.setState({ selectedTasks });
+  };
+
+  deleteSelectedTasks = () => {
+    const newTasks = [];
+    const { selectedTasks, tasks } = this.state;
+
+    tasks.forEach((task) => {
+      if (!selectedTasks.has(task.id)) {
+        newTasks.push(task);
+      }
+    });
+    this.setState({
+      tasks: newTasks,
+      selectedTasks: new Set(),
+    });
+  };
+
   render() {
     const isAddNewTaskButtonDisabled = !this.state.newTaskTitle.trim();
 
@@ -67,9 +108,25 @@ class Todo extends Component {
         </Row>
         <Row>
           {this.state.tasks.map((task) => {
-            return <Task data={task} key={task.id} />;
+            return (
+              <Task
+                data={task}
+                key={task.id}
+                onTaskDelete={this.onTaskDelete}
+                onTaskSelect={this.onTaskSelect}
+              />
+            );
           })}
         </Row>
+        <Button
+          className={styles.deletSelected}
+          variant="danger"
+          onClick={this.deleteSelectedTasks}
+          disabled={!this.state.selectedTasks.size}
+        >
+          Delete selected
+        </Button>
+        <ConfirmDialog />
       </Container>
     );
   }
