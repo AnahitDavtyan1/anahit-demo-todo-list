@@ -119,7 +119,7 @@ class Todo extends Component {
           })}
         </Row>
         <Button
-          className={styles.deletSelected}
+          className={styles.deleteSelected}
           variant="danger"
           onClick={this.deleteSelectedTasks}
           disabled={!this.state.selectedTasks.size}
