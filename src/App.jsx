@@ -36,8 +36,6 @@ class App extends Component {
   handleInputChange = (event) => {
     this.setState({
       amd: event.target.value,
-      price: event.target.price,
-      hasClicked: true,
     });
   };
 
