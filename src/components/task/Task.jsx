@@ -6,6 +6,7 @@ import styles from "./task.module.css";
 
 function Task(props) {
   const task = props.data;
+
   return (
     <Col xs={12} sm={6} md={4} lg={3}>
       <Card className="mt-2 mb-2">
