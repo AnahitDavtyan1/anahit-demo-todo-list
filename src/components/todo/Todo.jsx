@@ -95,7 +95,6 @@ class Todo extends Component {
     });
   };
   render() {
-    // console.log("Todo render");
     const { isConfirmDialogOpen, newTaskTitle, selectedTasks } = this.state;
     const isAddNewTaskButtonDisabled = !newTaskTitle.trim();
 

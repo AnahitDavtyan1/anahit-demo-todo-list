@@ -4,7 +4,6 @@ function ConfirmDialog(props) {
   return (
     <Modal size="md" show={true} onHide={props.onCancel}>
       <Modal.Header closeButton>
-        {/* <Modal.Title>Are you sure to delete {props.tasksCount} task(s)?</Modal.Title> */}
         <Modal.Title>
           Are you sure to delete {props.tasksCount}{" "}
           {props.tasksCount > 1 ? "tasks" : "task"}?
