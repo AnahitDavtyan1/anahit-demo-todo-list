@@ -1,14 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
 import Task from "../task/Task";
 import ConfirmDialog from "../ConfirmDialog";
 import DeleteSelected from "../deleteSelected/DeleteSelected";
+import TaskApi from "../../api/taskApi";
+
+const taskApi = new TaskApi();
 
 function Todo() {
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [selectedTasks, setSelectedTasks] = useState(new Set());
   const [taskToDelete, setTaskToDelete] = useState(null);
+
+  useEffect(() => {
+    taskApi.getAll().then((tasks) => {
+      setTasks(tasks);
+    });
+
+    // fetch(apiUrl+'/task', {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((result) => result.json())
+    //   .then((tasks) => {
+    //     setTasks(tasks);
+    //   });
+  }, []);
 
   const handleInputChange = (event) => {
     setNewTaskTitle(event.target.value);
@@ -26,26 +46,16 @@ function Todo() {
       return;
     }
 
-    const apiUrl = "http://localhost:3001/task";
-
     const newTask = {
       title: trimmedTitle,
     };
 
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTask),
-    })
-      .then((result) => result.json())
-      .then((task) => {
-        const tasksCopy = [...tasks];
-        tasksCopy.push(task);
-        setTasks(tasksCopy);
-        setNewTaskTitle("");
-      });
+    taskApi.add(newTask).then((task) => {
+      const tasksCopy = [...tasks];
+      tasksCopy.push(task);
+      setTasks(tasksCopy);
+      setNewTaskTitle("");
+    });
   };
 
   const onTaskDelete = (taskId) => {

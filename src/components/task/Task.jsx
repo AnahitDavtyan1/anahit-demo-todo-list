@@ -1,4 +1,5 @@
 import { memo } from "react";
+import PropTypes from "prop-types";
 import { Col, Button, Card, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
@@ -34,5 +35,11 @@ function Task(props) {
     </Col>
   );
 }
+
+Task.propTypes = {
+  data: PropTypes.object.isRequired,
+  onTaskDelete: PropTypes.func.isRequired,
+  onTaskSelect: PropTypes.func.isRequired,
+};
 
 export default memo(Task);
