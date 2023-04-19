@@ -11,12 +11,20 @@ export default class TaskApi {
     if (body !== null) {
       params.body = JSON.stringify(body);
     }
-    return fetch(taskApiUrl, params).then((result) => result.json());
+    return fetch(taskApiUrl, params)
+      .then((result) => result.json())
+      .then((data) => {
+        if (data.error) {
+          throw data.error;
+        }
+        return data;
+      });
   }
 
   getAll() {
     return this.#request("GET");
   }
+
   add(task) {
     return this.#request("POST", task);
   }
