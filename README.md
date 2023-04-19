@@ -6,7 +6,7 @@ Copy the file `.env.sample` and remove the `.sample` extension from configuratio
 `sh
     .env.sample -> .env
     `
-Change the variables according to our environment
+Change the variables according to your environment
 
 ## Available Scripts
 
