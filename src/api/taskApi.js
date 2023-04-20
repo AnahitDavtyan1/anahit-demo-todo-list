@@ -24,7 +24,6 @@ export default class TaskApi {
   getAll() {
     return this.#request("GET");
   }
-
   add(task) {
     return this.#request("POST", task);
   }
