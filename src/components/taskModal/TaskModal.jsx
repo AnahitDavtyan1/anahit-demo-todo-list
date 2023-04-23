@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect, useCallback } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import PropTypes from "prop-types";
@@ -16,7 +16,6 @@ function TaskModal(props) {
     if (data) {
       setTitle(data.title);
       setDescription(data.description);
-      console.log("data.date", data.date);
       setDate(data.date ? new Date(data.date) : new Date());
     }
   }, []);
@@ -62,7 +61,6 @@ function TaskModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Form.Control
-          // className={[styles.invalid, 'mb-3'].join(' ')}
           className={`${!isTitleValid ? styles.invalid : ""} mb-3`}
           placeholder="Title"
           value={title}

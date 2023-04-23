@@ -33,7 +33,6 @@ function Todo() {
         toast.success("The task has been added successfully!");
       })
       .catch((err) => {
-        console.log("err", err);
         toast.error(err.message);
       });
   };
@@ -103,13 +102,16 @@ function Todo() {
     taskApi
       .update(editedTask)
       .then((task) => {
-        console.log("task", task);
-        toast.success(`Tasks havs been updated successfully!`);
+        toast.success(`Tasks have been updated successfully!`);
         setEditableTask(null);
       })
       .catch((err) => {
         toast.error(err.message);
       });
+    const editedTasks = tasks.map((task) => {
+      return task._id === editedTask._id ? editedTask : task;
+    });
+    setTasks(editedTasks);
   };
 
   return (
