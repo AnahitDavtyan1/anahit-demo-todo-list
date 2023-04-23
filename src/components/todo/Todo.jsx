@@ -113,7 +113,7 @@ function Todo() {
         const newTasks = [...tasks];
         const foundIndex = newTasks.findIndex((t) => t._id === task._id);
         newTasks[foundIndex] = task;
-        toast.success(`Tasks havs been updated successfully!`);
+        toast.success(`Task has been updated successfully!`);
         setTasks(newTasks);
         setEditableTask(null);
       })

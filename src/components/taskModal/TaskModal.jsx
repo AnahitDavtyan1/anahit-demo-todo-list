@@ -17,6 +17,7 @@ function TaskModal(props) {
       setTitle(data.title);
       setDescription(data.description);
       setDate(data.date ? new Date(data.date) : new Date());
+      setIsTitleValid(true);
     }
   }, [props]);
 
