@@ -5,7 +5,7 @@ import Task from "../task/Task";
 import ConfirmDialog from "../ConfirmDialog";
 import DeleteSelected from "../deleteSelected/DeleteSelected";
 import TaskModal from "../taskModal/TaskModal";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../navBar/NavBar";
 import Filters from "../filters/Filters";
 import TaskApi from "../../api/taskApi";
 
@@ -18,15 +18,19 @@ function Todo() {
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
   const [editableTask, setEditableTask] = useState(null);
 
-  useEffect(() => {
+  const getTasks = (filters) => {
     taskApi
-      .getAll()
+      .getAll(filters)
       .then((tasks) => {
         setTasks(tasks);
       })
       .catch((err) => {
         toast.error(err.message);
       });
+  };
+
+  useEffect(() => {
+    getTasks();
   }, []);
 
   const onAddNewTask = (newTask) => {
@@ -56,7 +60,6 @@ function Todo() {
           newSelectedTasks.delete(taskId);
           setSelectedTasks(newSelectedTasks);
         }
-
         toast.success("The task has been deleted successfully!");
       })
       .catch((err) => {
@@ -88,7 +91,7 @@ function Todo() {
         setTasks(newTasks);
         setSelectedTasks(new Set());
         toast.success(
-          `${deletedTasksCount} tasks have been deleted successfully!`
+          `${deletedTasksCount} Tasks have been deleted successfully!`
         );
       })
       .catch((err) => {
@@ -109,7 +112,6 @@ function Todo() {
     taskApi
       .update(editedTask)
       .then((task) => {
-        console.log("task", task);
         const newTasks = [...tasks];
         const foundIndex = newTasks.findIndex((t) => t._id === task._id);
         newTasks[foundIndex] = task;
@@ -120,6 +122,10 @@ function Todo() {
       .catch((err) => {
         toast.error(err.message);
       });
+  };
+
+  const onFilter = (filters) => {
+    getTasks(filters);
   };
 
   return (
@@ -145,7 +151,7 @@ function Todo() {
         </Col>
       </Row>
       <Row>
-        <Filters />
+        <Filters onFilter={onFilter} />
       </Row>
       <Row>
         {tasks.map((task) => {
