@@ -5,7 +5,7 @@ import Task from "../task/Task";
 import ConfirmDialog from "../ConfirmDialog";
 import DeleteSelected from "../deleteSelected/DeleteSelected";
 import TaskModal from "../taskModal/TaskModal";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../NavBar/NavBar";
 import Filters from "../filters/Filters";
 import TaskApi from "../../api/taskApi";
 
