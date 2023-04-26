@@ -53,7 +53,6 @@ function TaskModal(props) {
     return () => {
       document.removeEventListener("keydown", keydownHandler);
     };
-    // eslint-disable-next-line
   }, [title, description, date]);
 
   return (
@@ -63,9 +62,8 @@ function TaskModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Form.Control
-          // className={[styles.invalid, 'mb-3'].join(' ')}
           className={`${!isTitleValid ? styles.invalid : ""} mb-3`}
-          placeholder="Title"
+          placeholder="Title*"
           value={title}
           onChange={onTitleChange}
         />
