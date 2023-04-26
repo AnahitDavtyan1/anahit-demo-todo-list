@@ -53,7 +53,7 @@ function TaskModal(props) {
     return () => {
       document.removeEventListener("keydown", keydownHandler);
     };
-  }, [title, description, date]);
+  }, [title, description, date]); // eslint-disable-line
 
   return (
     <Modal size="md" show={true} onHide={props.onCancel}>
