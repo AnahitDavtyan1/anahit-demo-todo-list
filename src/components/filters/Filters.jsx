@@ -45,7 +45,6 @@ const initialOptionFilters = {
 function Filters(props) {
   const [search, setSearch] = useState("");
   const [optionFilters, setOptionFilters] = useState(initialOptionFilters);
-
   const [dateFilters, setDateFilters] = useState(initialDateFilters);
 
   const resetFilters = () => {

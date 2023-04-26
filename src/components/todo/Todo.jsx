@@ -5,7 +5,7 @@ import Task from "../task/Task";
 import ConfirmDialog from "../ConfirmDialog";
 import DeleteSelected from "../deleteSelected/DeleteSelected";
 import TaskModal from "../taskModal/TaskModal";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../navBar/NavBar";
 import Filters from "../filters/Filters";
 import TaskApi from "../../api/taskApi";
 
@@ -60,7 +60,6 @@ function Todo() {
           newSelectedTasks.delete(taskId);
           setSelectedTasks(newSelectedTasks);
         }
-
         toast.success("The task has been deleted successfully!");
       })
       .catch((err) => {
@@ -113,7 +112,6 @@ function Todo() {
     taskApi
       .update(editedTask)
       .then((task) => {
-        console.log("task", task);
         const newTasks = [...tasks];
         const foundIndex = newTasks.findIndex((t) => t._id === task._id);
         newTasks[foundIndex] = task;
