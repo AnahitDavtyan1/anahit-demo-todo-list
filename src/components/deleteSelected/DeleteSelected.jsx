@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Button } from "react-bootstrap";
 import ConfirmDialog from "../ConfirmDialog";
 import styles from "./deleteSelected.module.css";
@@ -34,4 +34,4 @@ function DeleteSelected(props) {
   );
 }
 
-export default DeleteSelected;
+export default memo(DeleteSelected);

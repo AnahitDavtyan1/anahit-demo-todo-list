@@ -1,4 +1,4 @@
-.deleteButton {
+.actionButton {
   margin-left: 10px;
 }
 .actionButtons {
@@ -13,4 +13,10 @@
 }
 .selectTask input {
   cursor: pointer;
+}
+
+.textElipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
