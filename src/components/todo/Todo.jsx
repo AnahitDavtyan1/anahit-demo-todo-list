@@ -5,6 +5,7 @@ import Task from "../task/Task";
 import ConfirmDialog from "../ConfirmDialog";
 import DeleteSelected from "../deleteSelected/DeleteSelected";
 import TaskModal from "../taskModal/TaskModal";
+import styles from "./todo.module.css";
 import NavBar from "../NavBar/NavBar";
 import Filters from "../filters/Filters";
 import TaskApi from "../../api/taskApi";
@@ -133,7 +134,7 @@ function Todo() {
       <Row>
         <NavBar />
       </Row>
-      <Row className="justify-content-center m-3">
+      <Row className={`justify-content-center m-3 ${styles.topButtons}`}>
         <Col xs="6" sm="4" md="3">
           <Button variant="success" onClick={() => setIsAddTaskModalOpen(true)}>
             Add new task
