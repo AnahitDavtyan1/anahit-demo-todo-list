@@ -16,7 +16,7 @@ function Task(props) {
 
   return (
     <Col xs={12} sm={6} md={4} lg={3}>
-      <Card className={`mt-2 mb-2 ${styles.task}`}>
+      <Card className={`mt-2 mb-2 ${styles.taskBody}`}>
         <Card.Body className="statusBar">
           <Form.Check
             className={styles.selectTask}
