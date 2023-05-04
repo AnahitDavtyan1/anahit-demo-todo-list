@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Task from "../task/Task";
-import ConfirmDialog from "../ConfirmDialog";
-import DeleteSelected from "../deleteSelected/DeleteSelected";
-import TaskModal from "../taskModal/TaskModal";
-import styles from "./todo.module.css";
-import NavBar from "../NavBar/NavBar";
-import Filters from "../filters/Filters";
+import Task from "../../components/task/Task";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import DeleteSelected from "../../components/deleteSelected/DeleteSelected";
+import TaskModal from "../../components/taskModal/TaskModal";
+import Filters from "../../components/filters/Filters";
 import TaskApi from "../../api/taskApi";
 
 const taskApi = new TaskApi();
@@ -61,6 +59,7 @@ function Todo() {
           newSelectedTasks.delete(taskId);
           setSelectedTasks(newSelectedTasks);
         }
+
         toast.success("The task has been deleted successfully!");
       })
       .catch((err) => {
@@ -92,7 +91,7 @@ function Todo() {
         setTasks(newTasks);
         setSelectedTasks(new Set());
         toast.success(
-          `${deletedTasksCount} Tasks have been deleted successfully!`
+          `${deletedTasksCount} tasks have been deleted successfully!`
         );
       })
       .catch((err) => {
@@ -113,10 +112,11 @@ function Todo() {
     taskApi
       .update(editedTask)
       .then((task) => {
+        console.log("task", task);
         const newTasks = [...tasks];
         const foundIndex = newTasks.findIndex((t) => t._id === task._id);
         newTasks[foundIndex] = task;
-        toast.success(`Task has been updated successfully!`);
+        toast.success(`Tasks havs been updated successfully!`);
         setTasks(newTasks);
         setEditableTask(null);
       })
@@ -131,10 +131,8 @@ function Todo() {
 
   return (
     <Container>
-      <Row>
-        <NavBar />
-      </Row>
-      <Row className={`justify-content-center m-3 ${styles.topButtons}`}>
+      <Row></Row>
+      <Row className="justify-content-center m-3">
         <Col xs="6" sm="4" md="3">
           <Button variant="success" onClick={() => setIsAddTaskModalOpen(true)}>
             Add new task
