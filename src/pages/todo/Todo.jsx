@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Task from "../../components/task/Task";
 import ConfirmDialog from "../../components/ConfirmDialog";
@@ -112,11 +112,10 @@ function Todo() {
     taskApi
       .update(editedTask)
       .then((task) => {
-        console.log("task", task);
         const newTasks = [...tasks];
         const foundIndex = newTasks.findIndex((t) => t._id === task._id);
         newTasks[foundIndex] = task;
-        toast.success(`Tasks havs been updated successfully!`);
+        toast.success(`Task has been updated successfully!`);
         setTasks(newTasks);
         setEditableTask(null);
       })
@@ -195,18 +194,6 @@ function Todo() {
           data={editableTask}
         />
       )}
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </Container>
   );
 }
