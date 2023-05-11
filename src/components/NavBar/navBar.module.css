@@ -1,0 +1,9 @@
+.active {
+  color: red;
+}
+
+.navBarLinks {
+  display: flex;
+  column-gap: 10px;
+  margin-left: 10px;
+}

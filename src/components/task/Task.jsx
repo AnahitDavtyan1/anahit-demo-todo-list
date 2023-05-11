@@ -8,6 +8,7 @@ import {
   faCheck,
   faHistory,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/helpers";
 import styles from "./task.module.css";
 
@@ -27,50 +28,50 @@ function Task(props) {
           <Card.Text className={styles.textElipsis}>
             {task.description}
           </Card.Text>
-          <div className={styles.statusBar}>
-            <Card.Text>Status: {task.status}</Card.Text>
-            <Card.Text>Created At: {formatDate(task.created_at)}</Card.Text>
-            <Card.Text>Deadline: {formatDate(task.date)}</Card.Text>
-
-            <div className={styles.actionButtons}>
-              {task.status === "active" ? (
-                <Button
-                  title="Mark as done"
-                  variant="success"
-                  onClick={() =>
-                    props.onStatusChange({ status: "done", _id: task._id })
-                  }
-                >
-                  <FontAwesomeIcon icon={faCheck} />
-                </Button>
-              ) : (
-                <Button
-                  title="Mark as active"
-                  variant="info"
-                  onClick={() =>
-                    props.onStatusChange({ status: "active", _id: task._id })
-                  }
-                >
-                  <FontAwesomeIcon icon={faHistory} />
-                </Button>
-              )}
+          <Card.Text>Status: {task.status}</Card.Text>
+          <Card.Text>Created At: {formatDate(task.created_at)}</Card.Text>
+          <Card.Text>Deadline: {formatDate(task.date)}</Card.Text>
+          <Link to={`/task/${task._id}`}>
+            <Card.Text>Show details</Card.Text>
+          </Link>
+          <div className={styles.actionButtons}>
+            {task.status === "active" ? (
               <Button
-                title="Edit"
-                className={styles.actionButton}
-                variant="warning"
-                onClick={() => props.onTaskEdit(task)}
+                title="Mark as done"
+                variant="success"
+                onClick={() =>
+                  props.onStatusChange({ status: "done", _id: task._id })
+                }
               >
-                <FontAwesomeIcon icon={faPenToSquare} />
+                <FontAwesomeIcon icon={faCheck} />
               </Button>
+            ) : (
               <Button
-                title="Delete"
-                variant="danger"
-                className={styles.actionButton}
-                onClick={() => props.onTaskDelete(task._id)}
+                title="Mark as active"
+                variant="info"
+                onClick={() =>
+                  props.onStatusChange({ status: "active", _id: task._id })
+                }
               >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon icon={faHistory} />
               </Button>
-            </div>
+            )}
+            <Button
+              title="Edit"
+              className={styles.actionButton}
+              variant="warning"
+              onClick={() => props.onTaskEdit(task)}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </Button>
+            <Button
+              title="Delete"
+              variant="danger"
+              className={styles.actionButton}
+              onClick={() => props.onTaskDelete(task._id)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
           </div>
         </Card.Body>
       </Card>
