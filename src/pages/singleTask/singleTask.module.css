@@ -6,7 +6,11 @@
   justify-content: right;
 }
 .taskContainer {
-  height: calc(100vh - 40px);
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
+  /* width: 500px; */
+}
+.taskBody {
+  background-color: #e0e8e8e8;
 }

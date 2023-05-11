@@ -65,55 +65,57 @@ function SingleTask() {
           <Col xs={12}>
             <Card className="mt-2 mb-2">
               {task ? (
-                <Card.Body>
-                  <Card.Title>{task.title}</Card.Title>
-                  <Card.Text>{task.description}</Card.Text>
-                  <Card.Text>Status: {task.status}</Card.Text>
-                  <Card.Text>
-                    Created At: {formatDate(task.created_at)}
-                  </Card.Text>
-                  <Card.Text>Deadline: {formatDate(task.date)}</Card.Text>
-                  <Card.Text>Show details</Card.Text>
-                  <div className={styles.actionButtons}>
-                    {task.status === "active" ? (
+                <div className={styles.taskBody}>
+                  <Card.Body>
+                    <Card.Title>{task.title}</Card.Title>
+                    <Card.Text>{task.description}</Card.Text>
+                    <Card.Text>Status: {task.status}</Card.Text>
+                    <Card.Text>
+                      Created At: {formatDate(task.created_at)}
+                    </Card.Text>
+                    <Card.Text>Deadline: {formatDate(task.date)}</Card.Text>
+                    <Card.Text>Show details</Card.Text>
+                    <div className={styles.actionButtons}>
+                      {task.status === "active" ? (
+                        <Button
+                          title="Mark as done"
+                          variant="success"
+                          onClick={() =>
+                            onEditTask({ status: "done", _id: task._id })
+                          }
+                        >
+                          <FontAwesomeIcon icon={faCheck} />
+                        </Button>
+                      ) : (
+                        <Button
+                          title="Mark as active"
+                          variant="info"
+                          onClick={() =>
+                            onEditTask({ status: "active", _id: task._id })
+                          }
+                        >
+                          <FontAwesomeIcon icon={faHistory} />
+                        </Button>
+                      )}
                       <Button
-                        title="Mark as done"
-                        variant="success"
-                        onClick={() =>
-                          onEditTask({ status: "done", _id: task._id })
-                        }
+                        title="Edit"
+                        className={styles.actionButton}
+                        variant="warning"
+                        onClick={() => setEditTaskModalOpen(true)}
                       >
-                        <FontAwesomeIcon icon={faCheck} />
+                        <FontAwesomeIcon icon={faPenToSquare} />
                       </Button>
-                    ) : (
                       <Button
-                        title="Mark as active"
-                        variant="info"
-                        onClick={() =>
-                          onEditTask({ status: "active", _id: task._id })
-                        }
+                        title="Delete"
+                        variant="danger"
+                        className={styles.actionButton}
+                        onClick={onTaskDelete}
                       >
-                        <FontAwesomeIcon icon={faHistory} />
+                        <FontAwesomeIcon icon={faTrash} />
                       </Button>
-                    )}
-                    <Button
-                      title="Edit"
-                      className={styles.actionButton}
-                      variant="warning"
-                      onClick={() => setEditTaskModalOpen(true)}
-                    >
-                      <FontAwesomeIcon icon={faPenToSquare} />
-                    </Button>
-                    <Button
-                      title="Delete"
-                      variant="danger"
-                      className={styles.actionButton}
-                      onClick={onTaskDelete}
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </Button>
-                  </div>
-                </Card.Body>
+                    </div>
+                  </Card.Body>
+                </div>
               ) : (
                 <h3>Task data is not found</h3>
               )}
