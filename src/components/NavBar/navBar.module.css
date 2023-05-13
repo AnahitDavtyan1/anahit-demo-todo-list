@@ -1,9 +1,0 @@
-.active {
-  color: green;
-}
-
-.navBarLinks {
-  display: flex;
-  column-gap: 10px;
-  margin-left: 10px;
-}
