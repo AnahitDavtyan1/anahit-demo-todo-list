@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Todo from "./pages/todo/Todo";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
-// import NavBar from "./components/navBar/NavBar";
+import NavBar from "./components/navBar/NavBar";
 import SingleTask from "./pages/singleTask/SingleTask";
 import NotFound from "./pages/notFound/NotFound";
 
