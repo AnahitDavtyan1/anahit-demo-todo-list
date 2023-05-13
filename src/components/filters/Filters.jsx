@@ -89,10 +89,7 @@ function Filters(props) {
     <Accordion className="mb-4">
       <Accordion.Item eventKey="0">
         <Accordion.Header>
-          <Form
-            className={`${styles.form} d-flex`}
-            onClick={(event) => event.stopPropagation()}
-          >
+          <Form className={`${styles.form} d-flex`} onClick={(event) => event.stopPropagation()}>
             <Form.Control
               type="search"
               placeholder="Search"
@@ -101,18 +98,10 @@ function Filters(props) {
               value={search}
               onChange={onSearchChange}
             />
-            <span
-              className="btn btn-outline-success me-2"
-              title="Apply filters"
-              onClick={onApplyFilters}
-            >
+            <span className="btn btn-outline-success me-2" title="Apply filters" onClick={onApplyFilters}>
               <FontAwesomeIcon icon={faSearch} />
             </span>
-            <span
-              onClick={resetFilters}
-              className="btn btn-outline-info"
-              title="Reset filters"
-            >
+            <span onClick={resetFilters} className="btn btn-outline-info" title="Reset filters">
               <FontAwesomeIcon icon={faRefresh} />
             </span>
           </Form>
@@ -123,21 +112,13 @@ function Filters(props) {
               {dateOptions.map((dateOption) => {
                 const dateValue = dateFilters[dateOption.value];
                 return (
-                  <Col
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    className="text-center"
-                    key={dateOption.label}
-                  >
+                  <Col sm={6} md={4} lg={3} className="text-center" key={dateOption.label}>
                     <fieldset className={styles.filterItem}>
                       <legend>{dateOption.label}</legend>
                       <DatePicker
                         showIcon
                         selected={dateValue ? new Date(dateValue) : ""}
-                        onChange={(date) =>
-                          onDateChange(dateOption.value, date)
-                        }
+                        onChange={(date) => onDateChange(dateOption.value, date)}
                       />
                     </fieldset>
                   </Col>
@@ -149,16 +130,11 @@ function Filters(props) {
                 <fieldset>
                   <legend>Staus</legend>
                   <Form.Select
-                    onChange={(event) =>
-                      onFilterOptionChange("status", event.target.value)
-                    }
+                    onChange={(event) => onFilterOptionChange("status", event.target.value)}
                     value={optionFilters.status}
                   >
                     {statusOptions.map((statusOption) => (
-                      <option
-                        key={statusOption.label}
-                        value={statusOption.value}
-                      >
+                      <option key={statusOption.label} value={statusOption.value}>
                         {statusOption.label}
                       </option>
                     ))}
@@ -169,9 +145,7 @@ function Filters(props) {
                 <fieldset>
                   <legend>Sort</legend>
                   <Form.Select
-                    onChange={(event) =>
-                      onFilterOptionChange("sort", event.target.value)
-                    }
+                    onChange={(event) => onFilterOptionChange("sort", event.target.value)}
                     value={optionFilters.sort}
                   >
                     {sortOptions.map((sortOption) => (

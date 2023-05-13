@@ -11,33 +11,40 @@ function Contact() {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
-  const [emailErrorMessage, setEmailErrorMessage] = useState(null);
-  const [nameErrorMessage, setNameErrorMessage] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({
+    name: "",
+    email: "",
+  });
 
   const handleSubmit = async () => {
     const email = emailRef.current.value;
     const name = nameRef.current.value;
     const message = messageRef.current.value;
-    if (!name) {
-      setNameErrorMessage("Name is required!");
+
+    const isEmailInvalid = !emailRegex.test(email);
+    const hasSomeError = !name || !email || isEmailInvalid;
+
+    if (hasSomeError) {
+      let nameError = "";
+      let emailError = "";
+      if (!name) {
+        nameError = "Name is required!";
+      }
+      if (!email || isEmailInvalid) {
+        emailError = !email ? "Email is required!" : "Email address is not valid!";
+      }
+      setErrorMessages({
+        name: nameError,
+        email: emailError,
+      });
+      return;
     } else {
-      setNameErrorMessage(null);
+      setErrorMessages({
+        name: "",
+        email: "",
+      });
     }
 
-    if (!email) {
-      setEmailErrorMessage("Email address is required!");
-      return;
-    }
-    setEmailErrorMessage(null);
-
-    if (!emailRegex.test(email)) {
-      setEmailErrorMessage("Email address is not valid!");
-      return;
-    }
-    setEmailErrorMessage(null);
-    if (nameErrorMessage) {
-      return;
-    }
     const form = {
       name,
       email,
@@ -54,12 +61,12 @@ function Contact() {
     }
   };
 
+  console.log(errorMessages);
+
   return (
     <div className={styles.fill}>
       <div>
-        <h2 className={styles.contactPageTitle}>
-          We'd Love to hear From You !
-        </h2>
+        <h2 className={styles.contactPageTitle}>We'd Love to hear From You !</h2>
         <div className={styles.contactForm}>
           <label htmlFor="name" className={styles.label}>
             Full name*
@@ -67,11 +74,10 @@ function Contact() {
           <input
             type="text"
             id="name"
-            className={`${styles.textInput} ${
-              nameErrorMessage ? styles.invalid : ""
-            }`}
+            className={`${styles.textInput} ${errorMessages.name ? styles.invalid : ""}`}
             ref={nameRef}
           />
+          {errorMessages.name && <span className={styles.errorMessage}>{errorMessages.name}</span>}
           <label htmlFor="email" className={styles.label}>
             Email*
           </label>
@@ -79,37 +85,21 @@ function Contact() {
             type="email"
             id="email"
             placeholder="example@gmail.com"
-            className={`${styles.textInput} ${
-              emailErrorMessage ? styles.invalid : ""
-            }`}
+            className={`${styles.textInput} ${errorMessages.email ? styles.invalid : ""}`}
             ref={emailRef}
           />
+          {errorMessages.email && (
+            <span span className={styles.errorMessage}>
+              {errorMessages.email}
+            </span>
+          )}
           <label htmlFor="message" className={styles.label}>
             Message
           </label>
-          <textarea
-            id="message"
-            className={styles.textInputs}
-            rows={5}
-            ref={messageRef}
-          />
-          <Button
-            variant="success"
-            className={styles.submit}
-            onClick={handleSubmit}
-          >
+          <textarea id="message" className={styles.textInputs} rows={5} ref={messageRef} />
+          <Button variant="success" className={styles.submit} onClick={handleSubmit}>
             Submit
           </Button>
-          {nameErrorMessage && (
-            <h5 className={`${styles.errorMessage} mt-2 p-1`}>
-              {nameErrorMessage}
-            </h5>
-          )}
-          {emailErrorMessage && (
-            <h5 className={`${styles.errorMessage} mt-2 p-1`}>
-              {emailErrorMessage}
-            </h5>
-          )}
         </div>
       </div>
     </div>

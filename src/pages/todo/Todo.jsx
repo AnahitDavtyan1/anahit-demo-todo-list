@@ -7,7 +7,7 @@ import DeleteSelected from "../../components/deleteSelected/DeleteSelected";
 import TaskModal from "../../components/taskModal/TaskModal";
 import Filters from "../../components/filters/Filters";
 import TaskApi from "../../api/taskApi";
-
+import styles from "./todo.module.css";
 const taskApi = new TaskApi();
 
 function Todo() {
@@ -90,9 +90,7 @@ function Todo() {
         });
         setTasks(newTasks);
         setSelectedTasks(new Set());
-        toast.success(
-          `${deletedTasksCount} tasks have been deleted successfully!`
-        );
+        toast.success(`${deletedTasksCount} tasks have been deleted successfully!`);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -131,7 +129,7 @@ function Todo() {
   return (
     <Container>
       <Row></Row>
-      <Row className="justify-content-center m-3">
+      <Row className={`${styles.topButtons} justify-content-center m-3`}>
         <Col xs="6" sm="4" md="3">
           <Button variant="success" onClick={() => setIsAddTaskModalOpen(true)}>
             Add new task
@@ -166,11 +164,7 @@ function Todo() {
           );
         })}
       </Row>
-      <DeleteSelected
-        disabled={!selectedTasks.size}
-        tasksCount={selectedTasks.size}
-        onSubmit={deleteSelectedTasks}
-      />
+      <DeleteSelected disabled={!selectedTasks.size} tasksCount={selectedTasks.size} onSubmit={deleteSelectedTasks} />
       {taskToDelete && (
         <ConfirmDialog
           tasksCount={1}
@@ -181,19 +175,8 @@ function Todo() {
           }}
         />
       )}
-      {isAddTaskModalOpen && (
-        <TaskModal
-          onCancel={() => setIsAddTaskModalOpen(false)}
-          onSave={onAddNewTask}
-        />
-      )}
-      {editableTask && (
-        <TaskModal
-          onCancel={() => setEditableTask(null)}
-          onSave={onEditTask}
-          data={editableTask}
-        />
-      )}
+      {isAddTaskModalOpen && <TaskModal onCancel={() => setIsAddTaskModalOpen(false)} onSave={onAddNewTask} />}
+      {editableTask && <TaskModal onCancel={() => setEditableTask(null)} onSave={onEditTask} data={editableTask} />}
     </Container>
   );
 }
