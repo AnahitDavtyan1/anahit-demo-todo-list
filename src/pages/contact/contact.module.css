@@ -1,12 +1,10 @@
 div.fill {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   margin-top: 20vh;
-  margin-left: 45vh;
 }
 .contactPageTitle {
   margin-bottom: 5vh;
-  font-size: xxx-large;
 }
 
 .contactForm {
@@ -15,6 +13,7 @@ div.fill {
 }
 
 label {
+  margin-top: 10px;
   margin-bottom: 5px;
   font-size: large;
   font-weight: 500;
@@ -22,7 +21,6 @@ label {
 .textInput,
 .message {
   padding: 10px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   max-width: 500px;
 }
@@ -32,4 +30,13 @@ label {
   border: none;
   cursor: pointer;
   max-width: 100px;
+}
+.errorMessage {
+  color: red;
+  background-color: #c3babaad;
+  width: fit-content;
+  padding: 2px 4px;
+}
+.invalid {
+  border: 1px solid #f00;
 }

@@ -1,5 +1,7 @@
 .active {
-  color: red;
+  color: green;
+  background-color: #c3babaad;
+  width: fit-content;
 }
 
 .navBarLinks {
