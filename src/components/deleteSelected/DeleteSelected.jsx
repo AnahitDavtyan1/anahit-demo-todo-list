@@ -12,21 +12,16 @@ function DeleteSelected(props) {
 
   return (
     <>
-      <Button
-        className={styles.deletSelected}
-        variant="danger"
-        onClick={toggleConfirmDialog}
-        disabled={props.disabled}
-      >
+      <Button className={styles.deletSelected} variant="danger" onClick={toggleConfirmDialog} disabled={props.disabled}>
         Delete selected
       </Button>
       {isConfirmDialogOpen && (
         <ConfirmDialog
           tasksCount={props.tasksCount}
+          loading={props.loading}
           onCancel={toggleConfirmDialog}
           onSubmit={() => {
-            props.onSubmit();
-            toggleConfirmDialog();
+            props.onSubmit(toggleConfirmDialog);
           }}
         />
       )}
