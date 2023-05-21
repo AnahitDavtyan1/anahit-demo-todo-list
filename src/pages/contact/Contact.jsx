@@ -18,6 +18,15 @@ function Contact() {
     name: "",
     email: "",
   });
+
+  // const { contactFormLoading } = useSelector(
+  //   ({ loader }) => ({
+  //     contactFormLoader: loader.contactFormLoader,
+  //   }),
+  //   shallowEqual
+  // );
+  // // loading={contactFormLoader}
+
   const contactFormLoader = useSelector(({ loader }) => loader.contactFormLoader);
 
   const dispatch = useDispatch();
@@ -56,22 +65,17 @@ function Contact() {
       email,
       message,
     };
+    // Cannot set properties of null (setting 'value')
     try {
       dispatch(setLoader({ name: "contactFormLoader", value: true }));
       await formApi.sendForm(form);
       toast.success("Thank you for contacting us, the form has been sent!");
-      nameRef.current.value = "";
-      messageRef.current.value = "";
-      emailRef.current.value = "";
     } catch (err) {
       toast.error(err.message);
     } finally {
       dispatch(setLoader({ name: "contactFormLoader", value: false }));
     }
   };
-
-  console.log(contactFormLoader);
-
   return (
     <div className={styles.fill}>
       <div>

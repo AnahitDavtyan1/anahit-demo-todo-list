@@ -15,7 +15,6 @@ const activeLinkClassName = ({ isActive }) => {
 };
 
 function NavBar() {
-  const tasksCount = useSelector((store) => store.counter.tasksCount);
   return (
     <Navbar expand="sm">
       <Container fluid>
@@ -33,7 +32,6 @@ function NavBar() {
             </NavLink>
           </Nav>
         </Navbar.Collapse>
-        {tasksCount !== null && <div>Count: {tasksCount} </div>}
       </Container>
     </Navbar>
   );

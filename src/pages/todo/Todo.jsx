@@ -166,6 +166,7 @@ function Todo() {
   const onFilter = (filters) => {
     getTasks(filters);
   };
+  const tasksCount = useSelector((store) => store.counter.tasksCount);
 
   return (
     <Container>
@@ -187,6 +188,8 @@ function Todo() {
           </Button>
         </Col>
       </Row>
+      {tasksCount !== null && <div className={styles.count}> Count: {tasksCount} </div>}
+
       <Row>
         <Filters onFilter={onFilter} />
       </Row>

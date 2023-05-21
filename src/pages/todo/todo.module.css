@@ -4,7 +4,11 @@
   bottom: 30px;
   z-index: 2;
 }
-
+.count {
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 20px;
+}
 @media (max-width: 575px) {
   .topButtons {
     display: flex;
