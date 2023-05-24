@@ -19,14 +19,6 @@ function Contact() {
     email: "",
   });
 
-  // const { contactFormLoading } = useSelector(
-  //   ({ loader }) => ({
-  //     contactFormLoader: loader.contactFormLoader,
-  //   }),
-  //   shallowEqual
-  // );
-  // // loading={contactFormLoader}
-
   const contactFormLoader = useSelector(({ loader }) => loader.contactFormLoader);
 
   const dispatch = useDispatch();
@@ -65,7 +57,6 @@ function Contact() {
       email,
       message,
     };
-    // Cannot set properties of null (setting 'value')
     try {
       dispatch(setLoader({ name: "contactFormLoader", value: true }));
       await formApi.sendForm(form);

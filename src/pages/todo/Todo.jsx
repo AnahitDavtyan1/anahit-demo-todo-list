@@ -188,8 +188,7 @@ function Todo() {
           </Button>
         </Col>
       </Row>
-      {tasksCount !== null && <div className={styles.count}> Count: {tasksCount} </div>}
-
+      {tasksCount !== null && <div className={styles.count}> Task Count: {tasksCount} </div>}
       <Row>
         <Filters onFilter={onFilter} />
       </Row>
