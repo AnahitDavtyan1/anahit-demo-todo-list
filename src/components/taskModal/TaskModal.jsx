@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import PropTypes from "prop-types";
 import { formatDate } from "../../utils/helpers";
 import styles from "./taskModal.module.css";
-import Loading from "../loading/Loading";
 
 function TaskModal(props) {
   const [title, setTitle] = useState("");
@@ -68,41 +67,35 @@ function TaskModal(props) {
       <Modal.Header closeButton>
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <>
-          <Modal.Body>
-            <Form.Control
-              className={`${!isTitleValid ? styles.invalid : ""} mb-3`}
-              placeholder="Title"
-              value={title}
-              onChange={onTitleChange}
-              ref={titleRef}
-            />
-            <Form.Control
-              className="mb-3"
-              as="textarea"
-              placeholder="Description"
-              rows={5}
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-            />
-            <h6>Deadline:</h6>
-            <DatePicker showIcon selected={date} onChange={setDate} />
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="d-flex justify-content-evenly gap-3">
-              <Button variant="success" onClick={saveTask} disabled={!isTitleValid}>
-                Save
-              </Button>
-              <Button variant="warning" onClick={props.onCancel}>
-                Cancel
-              </Button>
-            </div>
-          </Modal.Footer>
-        </>
-      )}
+      <Modal.Body>
+        <Form.Control
+          className={`${!isTitleValid ? styles.invalid : ""} mb-3`}
+          placeholder="Title"
+          value={title}
+          onChange={onTitleChange}
+          ref={titleRef}
+        />
+        <Form.Control
+          className="mb-3"
+          as="textarea"
+          placeholder="Description"
+          rows={5}
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
+        />
+        <h6>Deadline:</h6>
+        <DatePicker showIcon selected={date} onChange={setDate} />
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="d-flex justify-content-evenly gap-3">
+          <Button variant="success" onClick={saveTask} disabled={!isTitleValid}>
+            Save
+          </Button>
+          <Button variant="warning" onClick={props.onCancel}>
+            Cancel
+          </Button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 }

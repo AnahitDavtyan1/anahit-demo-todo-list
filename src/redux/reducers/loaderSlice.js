@@ -3,16 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const loaderSlice = createSlice({
   name: "loader",
   initialState: {
-    tasksLoading: false,
-    editLoading: false,
-    deleteLoading: false,
-    addTaskLoading: false,
-    contactFormLoader: false,
+    loading: false,
   },
   reducers: {
     setLoader: (state, action) => {
-      const { name, value } = action.payload;
-      state[name] = value;
+      state.loading = action.payload;
     },
   },
   extraReducers: (builder) => {

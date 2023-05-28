@@ -1,5 +1,4 @@
 import { Modal, Button } from "react-bootstrap";
-import Loading from "./loading/Loading";
 
 function ConfirmDialog(props) {
   return (
@@ -9,22 +8,16 @@ function ConfirmDialog(props) {
           Are you sure to delete {props.tasksCount} {props.tasksCount > 1 ? "tasks" : "task"}?
         </Modal.Title>
       </Modal.Header>
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <>
-          <Modal.Body>
-            <div className="d-flex justify-content-evenly">
-              <Button variant="danger" onClick={props.onSubmit}>
-                Delete
-              </Button>
-              <Button variant="success" onClick={props.onCancel}>
-                Cancel
-              </Button>
-            </div>
-          </Modal.Body>
-        </>
-      )}
+      <Modal.Body>
+        <div className="d-flex justify-content-evenly">
+          <Button variant="danger" onClick={props.onSubmit}>
+            Delete
+          </Button>
+          <Button variant="success" onClick={props.onCancel}>
+            Cancel
+          </Button>
+        </div>
+      </Modal.Body>
     </Modal>
   );
 }

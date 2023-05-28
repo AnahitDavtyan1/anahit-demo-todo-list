@@ -22,18 +22,8 @@ function Todo() {
   const [editableTask, setEditableTask] = useState(null);
   const dispatch = useDispatch();
 
-  const { editLoading, deleteLoading, addTaskLoading, contactFormLoading } = useSelector(
-    ({ loader }) => ({
-      editLoading: loader.editLoading,
-      deleteLoading: loader.deleteLoading,
-      addTaskLoading: loader.addTaskLoading,
-      contactFormLoading: loader.contactFormLoading,
-    }),
-    shallowEqual
-  );
-
   const getTasks = (filters) => {
-    dispatch(setLoader({ name: "tasksLoading", value: true }));
+    dispatch(setLoader(true));
     taskApi
       .getAll(filters)
       .then((tasks) => {
@@ -43,7 +33,7 @@ function Todo() {
         toast.error(err.message);
       })
       .finally(() => {
-        dispatch(setLoader({ name: "tasksLoading", value: false }));
+        dispatch(setLoader(false));
       });
   };
 
@@ -56,7 +46,7 @@ function Todo() {
   }, [tasks.length]);
 
   const onAddNewTask = (newTask) => {
-    dispatch(setLoader({ name: "addTaskLoading", value: true }));
+    dispatch(setLoader(true));
     taskApi
       .add(newTask)
       .then((task) => {
@@ -70,12 +60,12 @@ function Todo() {
         toast.error(err.message);
       })
       .finally(() => {
-        dispatch(setLoader({ name: "addTaskLoading", value: false }));
+        dispatch(setLoader(false));
       });
   };
 
   const onTaskDelete = (taskId) => {
-    dispatch(setLoader({ name: "deleteLoading", value: true }));
+    dispatch(setLoader(true));
     taskApi
       .delete(taskId)
       .then(() => {
@@ -94,7 +84,7 @@ function Todo() {
         toast.error(err.message);
       })
       .finally(() => {
-        dispatch(setLoader({ name: "deleteLoading", value: false }));
+        dispatch(setLoader(false));
         setTaskToDelete(null);
       });
   };
@@ -110,7 +100,7 @@ function Todo() {
   };
 
   const deleteSelectedTasks = (toggleConfirmDialog) => {
-    dispatch(setLoader({ name: "deleteLoading", value: true }));
+    dispatch(setLoader(true));
     taskApi
       .deleteMany([...selectedTasks])
       .then(() => {
@@ -130,7 +120,7 @@ function Todo() {
       })
       .finally(() => {
         toggleConfirmDialog();
-        dispatch(setLoader({ name: "deleteLoading", value: false }));
+        dispatch(setLoader(false));
       });
   };
 
@@ -144,7 +134,7 @@ function Todo() {
   };
 
   const onEditTask = (editedTask) => {
-    dispatch(setLoader({ name: "editLoading", value: true }));
+    dispatch(setLoader(true));
     taskApi
       .update(editedTask)
       .then((task) => {
@@ -159,7 +149,7 @@ function Todo() {
         toast.error(err.message);
       })
       .finally(() => {
-        dispatch(setLoader({ name: "editLoading", value: false }));
+        dispatch(setLoader(false));
       });
   };
 
@@ -207,15 +197,9 @@ function Todo() {
           );
         })}
       </Row>
-      <DeleteSelected
-        disabled={!selectedTasks.size}
-        loading={deleteLoading}
-        tasksCount={selectedTasks.size}
-        onSubmit={deleteSelectedTasks}
-      />
+      <DeleteSelected disabled={!selectedTasks.size} tasksCount={selectedTasks.size} onSubmit={deleteSelectedTasks} />
       {taskToDelete && (
         <ConfirmDialog
-          loading={deleteLoading}
           tasksCount={1}
           onCancel={() => setTaskToDelete(null)}
           onSubmit={() => {
@@ -223,17 +207,8 @@ function Todo() {
           }}
         />
       )}
-      {isAddTaskModalOpen && (
-        <TaskModal loading={addTaskLoading} onCancel={() => setIsAddTaskModalOpen(false)} onSave={onAddNewTask} />
-      )}
-      {editableTask && (
-        <TaskModal
-          onCancel={() => setEditableTask(null)}
-          onSave={onEditTask}
-          loading={editLoading}
-          data={editableTask}
-        />
-      )}
+      {isAddTaskModalOpen && <TaskModal onCancel={() => setIsAddTaskModalOpen(false)} onSave={onAddNewTask} />}
+      {editableTask && <TaskModal onCancel={() => setEditableTask(null)} onSave={onEditTask} data={editableTask} />}
     </Container>
   );
 }

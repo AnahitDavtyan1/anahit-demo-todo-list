@@ -10,10 +10,12 @@ import { useSelector } from "react-redux";
 import Loading from "./components/loading/Loading";
 
 function App() {
-  const tasksLoading = useSelector(({ loader }) => loader.tasksLoading);
+  const loading = useSelector(({ loader }) => loader.loading);
+
   return (
     <BrowserRouter>
       <main>
+        {loading && <Loading />}
         <NavBar />
         <Routes>
           {routes.map((page) => (
@@ -32,7 +34,6 @@ function App() {
           pauseOnHover
           theme="colored"
         />
-        {tasksLoading && <Loading />}
       </main>
     </BrowserRouter>
   );
