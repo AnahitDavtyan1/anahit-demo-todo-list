@@ -24,7 +24,7 @@ const loaderSlice = createSlice({
   },
 });
 
-const { actions, reducer } = loaderSlice;
+const { actions } = loaderSlice;
 
 export const { setLoader } = actions;
 

@@ -7,7 +7,7 @@ import DeleteSelected from "../../components/deleteSelected/DeleteSelected";
 import TaskModal from "../../components/taskModal/TaskModal";
 import Filters from "../../components/filters/Filters";
 import TaskApi from "../../api/taskApi";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/reducers/loaderSlice";
 import styles from "./todo.module.css";
 import { setTasksCount } from "../../redux/reducers/counterSlice";

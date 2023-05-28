@@ -4,7 +4,7 @@ import FormApi from "../../api/formApi";
 import { toast } from "react-toastify";
 import styles from "./contact.module.css";
 import { setLoader } from "../../redux/reducers/loaderSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const formApi = new FormApi();
