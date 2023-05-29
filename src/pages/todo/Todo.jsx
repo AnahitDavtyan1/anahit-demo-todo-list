@@ -39,6 +39,7 @@ function Todo() {
 
   useEffect(() => {
     getTasks();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
