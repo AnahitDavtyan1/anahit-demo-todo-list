@@ -44,6 +44,7 @@ function Todo() {
 
   useEffect(() => {
     dispatch(setTasksCount(tasks.length));
+    // eslint-disable-next-line
   }, [tasks.length]);
 
   const onAddNewTask = (newTask) => {
